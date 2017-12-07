@@ -1,6 +1,5 @@
 from flask import render_template, jsonify, request, Flask
 from flask_cors import CORS
-from dateutil import parser
 import requests
 
 from gas_price import get_gas_price
