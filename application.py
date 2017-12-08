@@ -6,15 +6,13 @@ from gas_price import get_gas_price
 
 
 application = Flask(__name__)
-application.debug = True
 cors = CORS(application)
 
 
-@application.route('/getPrice', methods=['GET'])
+@application.route('/', methods=['GET'])
 def get_price():
     data = get_gas_price()
     response = jsonify(data)
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 

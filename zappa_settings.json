@@ -3,8 +3,8 @@
         "app_function": "application.application",
         "aws_region": "us-east-1",
         "profile_name": "default",
-        "project_name": "gas-station",
+        "project_name": "gas-station-api",
         "runtime": "python3.6",
-        "s3_bucket": "zappa-6o1lfq3r7"
+        "s3_bucket": "zappa-j97cyeiww"
     }
 }
