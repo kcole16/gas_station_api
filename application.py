@@ -11,10 +11,10 @@ cors = CORS(application)
 
 @application.route('/', methods=['GET'])
 def get_price():
-    data = get_gas_price()
-    response = jsonify(data)
-    return response
-
+    # data = get_gas_price()
+    # response = jsonify(data)
+    # return response
+    return "Hello"
 
 if __name__ == "__main__":
     application.debug = True
