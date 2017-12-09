@@ -94,23 +94,26 @@ def compute_gas_price(probabilities, desired_probability):
         raise Exception('Invariant')
 
 
-def get_gas_price(probability=PROBABIITY, allowed_wait=ALLOWED_WAIT, sample_size=SAMPLE_SIZE):
-    avg_block_time = get_avg_block_time(w3, sample_size=sample_size)
-    # print('AVG BLOCK TIME:', avg_block_time)
-    wait_blocks = int(math.ceil(ALLOWED_WAIT / avg_block_time))
-    # print('WAIT BLOCKS:', wait_blocks)
+def get_gas_price(data=None, probability=PROBABIITY, allowed_wait=ALLOWED_WAIT, sample_size=SAMPLE_SIZE):
+    try:
+        avg_block_time = get_avg_block_time(w3, sample_size=sample_size)
+        # print('AVG BLOCK TIME:', avg_block_time)
+        wait_blocks = int(math.ceil(ALLOWED_WAIT / avg_block_time))
+        # print('WAIT BLOCKS:', wait_blocks)
 
-    raw_data = get_raw_miner_data(w3, sample_size=sample_size)
-    miner_data = aggregate_miner_data(raw_data)
+        raw_data = get_raw_miner_data(w3, sample_size=sample_size)
+        miner_data = aggregate_miner_data(raw_data)
 
-    probabilities = compute_probabilities(miner_data, wait_blocks, sample_size=sample_size)
-    # print('PROBABIITIES:', probabilities)
+        probabilities = compute_probabilities(miner_data, wait_blocks, sample_size=sample_size)
+        # print('PROBABIITIES:', probabilities)
 
-    gas_price = compute_gas_price(probabilities, PROBABIITY / 100)
-    gas_price_gwei = Web3.fromWei(gas_price, 'gwei')
-    data = {
-        'safe_price_in_gwei': float(gas_price_gwei),
-        'avg_block_time': float(avg_block_time),
-        'wait_blocks': int(wait_blocks),
-    }
+        gas_price = compute_gas_price(probabilities, PROBABIITY / 100)
+        gas_price_gwei = Web3.fromWei(gas_price, 'gwei')
+        data = {
+            'safe_price_in_gwei': float(gas_price_gwei),
+            'avg_block_time': float(avg_block_time),
+            'wait_blocks': int(wait_blocks),
+        }
+    except:
+        print("Error")
     return data
